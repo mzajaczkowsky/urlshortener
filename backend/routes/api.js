@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const componentTest = require('../components/api/test');
+const shortenLinkActions = require('../components/api/shortenlinks');
 
-router.get('/', componentTest.homepage);
+router.get('/', shortenLinkActions.saveURL);
 
 
 
