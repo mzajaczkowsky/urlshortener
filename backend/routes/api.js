@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const shortenLinkActions = require('../components/api/shortenlinks');
+const linkActions = require('../components/api/urlActions');
 
-router.get('/', shortenLinkActions.saveURL);
-
+router.get('/:r', linkActions.redirectURL);
+router.get('/r/:id', linkActions.getURL);
+router.post('/r', linkActions.saveURL);
 
 
 module.exports = router;
