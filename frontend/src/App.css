@@ -1,0 +1,78 @@
+#root {
+  margin: 0 auto;
+  
+  font-family: 'Kadwa';
+  font-style: normal;
+  color: #000000;
+
+}
+
+#App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: white;
+  width: 420px;
+  height: 600px;
+  
+  background: #D9D9D9;
+  border-radius: 40px;
+}
+
+#titleText{  
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#h1Text{
+  font-weight: 700;
+  font-size: 40px;
+}
+
+#h2Text{
+  font-weight: 400;
+  font-size: 14px;
+}
+
+#communicate{
+  width: 300px;
+  height: 100px;
+  
+  font-weight: 400;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+}
+
+input{
+  width: 300px;
+  height: 60px;
+  outline: none;
+  border: none;
+  
+  font-family: 'Kadwa';
+  font-style: normal;
+  color: #222;
+  text-align: center;
+
+  background: #EFEFEF;
+  border-radius: 40px;
+}
+
+.inputValues{
+  font-size: 10px;
+}
+
+#buttonCreate{
+  width: 300px;
+  height: 80px;
+
+  background: #00A3FF;
+  border-radius: 40px;
+}

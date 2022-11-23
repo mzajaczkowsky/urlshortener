@@ -4,7 +4,7 @@ const router = express.Router();
 const linkActions = require('../components/api/urlActions');
 
 router.get('/:r', linkActions.redirectURL);
-router.get('/r/:id', linkActions.getURL);
+router.get('/r/:parameter', linkActions.getURL);
 router.post('/r', linkActions.saveURL);
 
 
