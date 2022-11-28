@@ -1,44 +1,77 @@
 import { useState } from "react";
+import validator from 'validator';
 
 function ActionBox() {
-
-    const [shortenURLValue, setShortenURLValue] = useState<string>();
-    const [inputURLValue, setInputURLValue] = useState<string>();
+    
+    const [communicate, setCommunicate] = useState<string>("");
+    const [shortenURLValue, setShortenURLValue] = useState<string>("");
+    const [inputURLValue, setInputURLValue] = useState<any>("");
 
     return (
             <>
-            {/* <TextField inputValue={shortenURLValue} textValue="SHORTEN NAME" />
-            <TextField inputValue={inputURLValue} textValue="YOUR URL" />             */}
+            <div id="communicate">  
+                {communicate}          
+            </div>
             <div className="inputValues">
             <div>SHORTEN NAME</div>
-                <input value={shortenURLValue} name="shortenURLValue" onChange={
-                    e => setShortenURLValue(e.target.value)} />
+                <input value={shortenURLValue} name="shortenURLValue" placeholder="minimum 4 characters" onChange={
+                    e => {
+                        setShortenURLValue(e.target.value)
+                        setCommunicate("")
+                        }} />
             </div>
             <div className="inputValues">
                 <div>YOUR URL</div>
-                <input value={inputURLValue} name="inputURLValue" onChange={
-                    e => setInputURLValue(e.target.value)} />
+                <input value={inputURLValue} name="inputURLValue" placeholder="https://google.com/" onChange={
+                    e => {
+                        setInputURLValue(e.target.value)
+                        setCommunicate("")
+                        }} />
             </div>
 
-            <button id="createButton" onClick={() => {
+            <div id="createButton" onClick={async () => {
                 const data = {
                     "shorterName": shortenURLValue,
                     "redirect": inputURLValue,
                     "dateCreated": new Date().toUTCString()
                 }
-                console.log(inputURLValue);
-                fetch('http://localhost:3000/r', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                }).then((response) => response.json()).then((data) => {
-                    console.log('Success:', data);
-                }).catch((error) => {
+
+                const validURL = validator.isURL(inputURLValue);
+                const validName = validator.isLength(shortenURLValue, {min:4, max: 20});
+                async function fetchLink(){
+                    const res = await fetch('http://localhost:3000/r', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)})
+
+                    const d = await res.json();
+                    if(!res.ok) throw Error(d.message)
+                    return d;
+                }
+
+                
+                
+                if(validURL && validName){
+                try {   
+                    const c = await fetchLink()
+                    setCommunicate(`Your created URL: ${c.url}`)                    
+                } catch (error:any) {
+                    setCommunicate(error.message);
                     console.error('Error:', error);
-                });
-            }}>CREATE</button>
+                }
+                }
+                else if(!validURL && !validName){
+                    setCommunicate("Created name is too short and input URL is not valid!");
+                }                
+                else if(!validName){
+                    setCommunicate("Created name is too short!");
+                }
+                else if(!validURL){
+                    setCommunicate("Input URL is not valid!");
+                }
+            }}>CREATE</div>
 
             </>
         );

@@ -69,10 +69,15 @@ input{
   font-size: 10px;
 }
 
-#buttonCreate{
+#createButton{
+  margin-top: 40px;
   width: 300px;
-  height: 80px;
-
+  height: 60px;
   background: #00A3FF;
   border-radius: 40px;
+  font-size: 20px;
+  font-weight: 700;
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }
