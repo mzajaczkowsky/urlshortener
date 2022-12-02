@@ -5,5 +5,5 @@ An application that allows you to create a shortened link based on the given nam
 
 ## Demo
 
-![](urlshortenergif.gif)
+![](urlshortenergithub_gifver.mp4)
 
